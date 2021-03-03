@@ -27,8 +27,10 @@ export default function App() {
 
   return (
     <Router>
-      <Header />
-      <Form />
+      <main className='main'>
+        <Header />
+        <Form />
+      </main>
     </Router>
   )
 }
