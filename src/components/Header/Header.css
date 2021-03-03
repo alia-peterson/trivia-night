@@ -1,7 +1,10 @@
-.header {
+.header,
+.footer {
   align-items: flex-end;
   background-color: #771200;
+  color: white;
   display: flex;
+  font-weight: bold;
   justify-content: space-between;
   padding: 0 2rem;
   width: calc(100% - 4rem);

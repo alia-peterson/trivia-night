@@ -7,6 +7,7 @@ import Header from '../Header/Header'
 import Form from '../Form/Form'
 import Recipe from '../Recipe/Recipe'
 import Question from '../Question/Question'
+import Footer from '../Footer/Footer'
 import fetchAPI from '../../fetchAPI'
 import './App.css'
 
@@ -27,10 +28,13 @@ export default function App() {
 
   return (
     <Router>
-      <main className='main'>
+      <div className='App'>
         <Header />
-        <Form />
-      </main>
+        <main className='main'>
+          <Form />
+        </main>
+        <Footer />
+      </div>
     </Router>
   )
 }
