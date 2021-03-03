@@ -1,0 +1,6 @@
+"eslintConfig": {
+  "extends": "react-app",
+  "rules": {
+    "quote-props": ["double", "consistent-as-needed"]
+    }
+}
