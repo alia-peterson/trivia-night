@@ -2,6 +2,7 @@ import React from 'react'
 import './Recipe.css'
 
 export default function Recipe({ recipe }) {
+  const instructions = recipe.strInstructions
   const ingredientDescriptions = Object.values(recipe)
   const ingredientProperties = Object.keys(recipe)
 
@@ -12,6 +13,7 @@ export default function Recipe({ recipe }) {
       const measurement = array.find(item => {
         return item === `strMeasure${ingredientNumber}`
       })
+
       const measurementIndex = array.indexOf(measurement)
       acc.push(ingredientDescriptions[index] + ' ' + ingredientDescriptions[measurementIndex])
       ingredientNumber += 1
@@ -24,12 +26,13 @@ export default function Recipe({ recipe }) {
     return <li key={index}>{ing}</li>
   })
 
-  console.log('recipe name', recipe);
+  // console.log('recipe name', recipe);
   return (
     <article className='recipe-container'>
       <h2>Beverage Recipe:</h2>
       <h3>{recipe.strDrink}</h3>
       <ul>{ingredients}</ul>
+      <p>{instructions}</p>
     </article>
   )
 }
