@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { Component } from 'react'
 import {
   BrowserRouter as Router,
   Route
@@ -12,56 +12,68 @@ import Recipe from '../Recipe/Recipe'
 import Question from '../Question/Question'
 import Footer from '../Footer/Footer'
 
-export default function App() {
-  const [recipes, setRecipes] = useState([])
-  const [currentBeverage, setCurrentBeverage] = useState({})
-  const [trivia, setTrivia] = useState([])
-
-  const populateRecipe = (event) => {
-    console.log('success!');
-    const recipeInfo = fetchAPI.getRecipe()
-    const number = Math.floor(Math.random() * Math.floor(recipes.length))
-
-    setRecipes(recipeInfo)
-    setCurrentBeverage(recipes[number])
+export default class App extends Component {
+  constructor() {
+    super()
+    this.state = {
+      recipes: [],
+      currentBeverage: {},
+      trivia: []
+    }
   }
 
-  const populateTrivia = () => {
-    const triviaInfo = fetchAPI.getTrivia()
-    setTrivia(triviaInfo)
+  populateRecipe = (event) => {
+    const recipeInfo = Promise.resolve(fetchAPI.getRecipe())
+    const number = Math.floor(Math.random() * Math.floor(this.state.recipes.length))
+
+    recipeInfo.then(recipe => {
+      this.setState({
+        recipes: recipe.drinks,
+        currentBeverage: recipe.drinks[number]
+      })
+    })
   }
 
-  return (
-    <Router>
-      <div className='App'>
-        <Header />
-        <main className='main'>
-          <Route
-            exact path='/'
-            render={() => {
-              return <Form
-                populateRecipe={populateRecipe}
-                populateTrivia={populateTrivia}
-                />
-            }}
-            />
-          <Route
-            exact path='/recipe'
-            render={() => {
-              return <Recipe
-                recipe={currentBeverage}
-                />
-            }}
-            />
-          <Route
-            exact path='/trivia'
-            render={() => {
-              return <Question />
-            }}
-            />
-        </main>
-        <Footer />
-      </div>
-    </Router>
-  )
+  populateTrivia = () => {
+    const triviaInfo = Promise.resolve(fetchAPI.getTrivia('medium'))
+    triviaInfo.then(trivia => {
+      this.setState({ trivia: trivia.results })
+    })
+  }
+
+  render() {
+    return (
+      <Router>
+        <div className='App'>
+          <Header />
+          <main className='main'>
+            <Route
+              exact path='/'
+              render={() => {
+                return <Form
+                  populateRecipe={this.populateRecipe}
+                  populateTrivia={this.populateTrivia}
+                  />
+              }}
+              />
+            <Route
+              exact path='/recipe'
+              render={() => {
+                return <Recipe
+                  recipe={this.state.currentBeverage}
+                  />
+              }}
+              />
+            <Route
+              exact path='/trivia'
+              render={() => {
+                return <Question />
+              }}
+              />
+          </main>
+          <Footer />
+        </div>
+      </Router>
+    )
+  }
 }
