@@ -1,15 +1,27 @@
 .header,
 .footer {
-  align-items: flex-end;
   background-color: #6E9CA5;
   display: flex;
   font-weight: bold;
   justify-content: space-between;
+  min-height: 50px;
   padding: 0 2rem;
   width: calc(100% - 4rem);
 }
 
-.button-nav {
+.header {
+  align-items: flex-end;
+}
+
+.footer {
+  align-items: center;
+}
+
+.nav-container {
+  padding: 0.5rem;
+}
+
+.nav-link {
   background-color: #E8B357;
   border: none;
   font-size: 18px;
@@ -17,10 +29,14 @@
   margin: 0 0.2rem;
 }
 
-.button-nav:hover {
+.nav-link:hover {
   cursor: pointer;
 }
 
-.button-nav:disabled {
+.nav-link:disabled {
   cursor: default;
+}
+
+a:link {
+  text-decoration: none;
 }

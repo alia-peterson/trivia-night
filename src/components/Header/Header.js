@@ -6,22 +6,22 @@ export default function Header() {
   return (
     <header className='header'>
       <h1>Triviology</h1>
-      <div>
+      <div className='nav-container'>
         <NavLink
           exact to='/'
-          className='button-nav'
+          className='nav-link'
           >
           Home
         </NavLink>
         <NavLink
           exact to='/recipe'
-          className='button-nav'
+          className='nav-link'
           >
           Recipe
         </NavLink>
         <NavLink
           exact to='/trivia'
-          className='button-nav'
+          className='nav-link'
           >
           Trivia
         </NavLink>
