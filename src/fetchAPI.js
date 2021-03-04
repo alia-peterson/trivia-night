@@ -3,10 +3,14 @@ import recipeData from './data/recipe-data'
 
 export default {
   getRecipe() {
-    return recipeData.drinks // array
+    return fetch('https://www.thecocktaildb.com/api/json/v1/1/random.php')
+      .then(response => response.json())
+      .catch(error => console.log(error))
   },
 
-  getTrivia() {
-    return triviaData.results // array
+  getTrivia(difficulty) {
+    return fetch(`https://opentdb.com/api.php?amount=10&category=20&difficulty=${difficulty}`)
+      .then(response => response.json())
+      .catch(error => console.log(error))
   }
 }

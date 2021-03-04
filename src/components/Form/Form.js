@@ -35,7 +35,7 @@ export default function Form({ populateRecipe, populateTrivia }) {
           <option value='medium'>Medium</option>
           <option value='hard'>Hard</option>
         </select>
-        <Link to='/trivia'>
+        <Link to='/recipe'>
           <button className='button'>
             Submit
           </button>
