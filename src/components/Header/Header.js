@@ -7,9 +7,24 @@ export default function Header() {
     <header className='header'>
       <h1>Triviology</h1>
       <div>
-        <button className='button-nav'>Home</button>
-        <button className='button-nav'>Recipe</button>
-        <button className='button-nav'>Trivia</button>
+        <NavLink
+          exact to='/'
+          className='button-nav'
+          >
+          Home
+        </NavLink>
+        <NavLink
+          exact to='/recipe'
+          className='button-nav'
+          >
+          Recipe
+        </NavLink>
+        <NavLink
+          exact to='/trivia'
+          className='button-nav'
+          >
+          Trivia
+        </NavLink>
       </div>
     </header>
   )

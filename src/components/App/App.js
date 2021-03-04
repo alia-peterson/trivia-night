@@ -31,7 +31,24 @@ export default function App() {
       <div className='App'>
         <Header />
         <main className='main'>
-          <Form />
+          <Route
+            exact path='/'
+            render={() => {
+              return <Form />
+            }}
+            />
+          <Route
+            exact path='/recipe'
+            render={() => {
+              return <Recipe />
+            }}
+            />
+          <Route
+            exact path='/trivia'
+            render={() => {
+              return <Question />
+            }}
+            />
         </main>
         <Footer />
       </div>
