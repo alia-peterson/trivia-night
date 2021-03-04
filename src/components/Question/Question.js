@@ -45,13 +45,27 @@ export default class Question extends Component {
   }
 
   componentDidMount = () => {
-    this.setState({
-      allQuestions: this.props.questions,
-      category: this.props.questions[0].category,
-      currentQuestion: this.props.questions[0]
-    })
+    const storedInformation = JSON.parse(localStorage.getItem('triviology-info'))
+    const storedTrivia = JSON.parse(localStorage.getItem('triviology-trivia'))
+    console.log(storedInformation);
+    console.log(storedTrivia);
+
+    if (storedInformation && storedTrivia) {
+      this.setState({
+        allQuestions: storedInformation.questions,
+        category: storedInformation.trivia[0].category,
+        currentQuestion: storedInformation.trivia[0]
+      })
+
+    } else {
+      this.setState({
+        allQuestions: this.props.questions,
+        category: this.props.questions[0].category,
+        currentQuestion: this.props.questions[0]
+      })
+      localStorage.setItem('triviology-trivia', JSON.stringify(this.state))
+    }
     this.randomizeAnswers()
-    console.log(this.state);
   }
 
   render() {
@@ -61,10 +75,19 @@ export default class Question extends Component {
         <article className='trivia-container' id={this.state.questionNumber}>
           <h2>Question {this.state.questionNumber}:</h2>
           <p>{this.state.currentQuestion.question}</p>
-          <div></div>
+          <div>
+            <button
+              onClick={this.updateQuestion}
+              className='correct'
+              >
+              {this.state.currentQuestion.correct_answer}
+            </button>
+
+          </div>
           <button
             className='button'
             onClick={this.updateQuestion}
+            disabled
             >
             Next Question >
           </button>

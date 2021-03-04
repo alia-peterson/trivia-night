@@ -31,6 +31,7 @@ export default class App extends Component {
         recipes: recipe.drinks,
         currentBeverage: recipe.drinks[number]
       })
+      localStorage.setItem('trivia-info', JSON.stringify(this.state))
     })
   }
 
@@ -41,6 +42,7 @@ export default class App extends Component {
         question.id = index
       })
       this.setState({ trivia: trivia.results })
+      localStorage.setItem('triviology-info', JSON.stringify(this.state))
     })
   }
 

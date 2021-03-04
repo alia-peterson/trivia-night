@@ -9,13 +9,13 @@ export default function Recipe({ recipe }) {
   let ingredientNumber = 1
   const ingredientsList = ingredientProperties.reduce((acc, curr, index, array) => {
 
-    if (curr === `strIngredient${ingredientNumber}` && ingredientDescriptions[index]) {
+    if (curr === `strIngredient${ingredientNumber}` &&
+                  ingredientDescriptions[index]) {
       const measurement = array.find(item => {
         return item === `strMeasure${ingredientNumber}`
       })
 
-      const measurementIndex = array.indexOf(measurement)
-      acc.push(ingredientDescriptions[index] + ' ' + ingredientDescriptions[measurementIndex])
+      acc.push(recipe[curr] + ' ' + recipe[measurement])
       ingredientNumber += 1
     }
 
