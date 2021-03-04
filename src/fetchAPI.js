@@ -3,10 +3,10 @@ import recipeData from './data/recipe-data'
 
 export default {
   getRecipe() {
-    return triviaData.results // array
+    return recipeData.drinks // array
   },
 
   getTrivia() {
-    return recipeData.drinks // array
+    return triviaData.results // array
   }
 }
