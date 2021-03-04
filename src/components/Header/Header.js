@@ -5,11 +5,11 @@ import './Header.css'
 export default function Header() {
   return (
     <header className='header'>
-      <h1>Trivia Night</h1>
+      <h1>Triviology</h1>
       <div>
-        <button>Home</button>
-        <button>Recipe</button>
-        <button>Trivia</button>
+        <button className='button-nav'>Home</button>
+        <button className='button-nav'>Recipe</button>
+        <button className='button-nav'>Trivia</button>
       </div>
     </header>
   )

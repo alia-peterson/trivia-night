@@ -1,11 +1,26 @@
 .header,
 .footer {
   align-items: flex-end;
-  background-color: #771200;
-  color: white;
+  background-color: #6E9CA5;
   display: flex;
   font-weight: bold;
   justify-content: space-between;
   padding: 0 2rem;
   width: calc(100% - 4rem);
+}
+
+.button-nav {
+  background-color: #E8B357;
+  border: none;
+  font-size: 18px;
+  padding: 0.5rem;
+  margin: 0 0.2rem;
+}
+
+.button-nav:hover {
+  cursor: pointer;
+}
+
+.button-nav:disabled {
+  cursor: default;
 }
