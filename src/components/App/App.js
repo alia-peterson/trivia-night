@@ -67,7 +67,9 @@ export default class App extends Component {
             <Route
               exact path='/trivia'
               render={() => {
-                return <Question />
+                return <Question
+                  questions={this.state.trivia}
+                  />
               }}
               />
           </main>
