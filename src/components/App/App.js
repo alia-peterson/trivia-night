@@ -6,11 +6,11 @@ import {
 import fetchAPI from '../../fetchAPI'
 import './App.css'
 
-import Header from '../Header/Header'
+import Header from '../HeaderFooter/Header'
+import Footer from '../HeaderFooter/Footer'
 import Form from '../Form/Form'
 import Recipe from '../Recipe/Recipe'
 import Question from '../Question/Question'
-import Footer from '../Footer/Footer'
 
 export default class App extends Component {
   constructor() {
