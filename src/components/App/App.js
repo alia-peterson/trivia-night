@@ -37,8 +37,17 @@ export default class App extends Component {
   populateTrivia = () => {
     const triviaInfo = Promise.resolve(fetchAPI.getTrivia('medium'))
     triviaInfo.then(trivia => {
+      trivia.results.forEach((question, index) => {
+        question.id = index
+      })
       this.setState({ trivia: trivia.results })
     })
+  }
+
+  answerTrivia = (event) => {
+    event.preventDefault()
+    const questionNumber = event.target.closest('article').id
+    console.log(questionNumber);
   }
 
   render() {
@@ -69,6 +78,7 @@ export default class App extends Component {
               render={() => {
                 return <Question
                   questions={this.state.trivia}
+                  answerQuestion={this.answerTrivia}
                   />
               }}
               />

@@ -1,22 +1,39 @@
 import React from 'react'
 import './Question.css'
 
-export default function Question({ questions }) {
+export default function Question({ questions, answerQuestion }) {
   let questionNumber = 1
   const triviaCategory = questions[0].category
   const currentQuestion = questions[questionNumber]
   const possibleAnswers = [currentQuestion.correct_answer, ...currentQuestion.incorrect_answers]
   const answerList = possibleAnswers.map((answer, index) => {
-    return <li key={index}>{answer}</li>
+    if (index === 0) {
+      return <button
+        key={index}
+        onClick={answerQuestion}
+        className='button-trivia correct'
+        >
+        {answer}
+      </button>
+    } else {
+      return <button
+        key={index}
+        onClick={answerQuestion}
+        className='button-trivia incorrect'
+        >
+        {answer}
+      </button>
+    }
   })
 
   return (
     <div>
       <h2>Category: {triviaCategory}</h2>
-      <article className='trivia-container'>
+      <article className='trivia-container' id={questionNumber}>
         <h2>Question {questionNumber}:</h2>
         <p>{currentQuestion.question}</p>
-        <ul>{answerList}</ul>
+        <div>{answerList}</div>
+        <button className='button'>Next Question ></button>
       </article>
     </div>
   )
