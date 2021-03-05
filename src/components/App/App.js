@@ -20,7 +20,8 @@ export default class App extends Component {
       currentBeverage: {},
       trivia: [],
       questionNumber: 1,
-      currentQuestion: {}
+      currentQuestion: {},
+      score: 0
     }
   }
 
@@ -54,14 +55,31 @@ export default class App extends Component {
     const thisAnswer = !event.target.classList.contains('incorrect')
     const thisQuestion = this.state.currentQuestion
     thisQuestion.answer = thisAnswer
+    let newScore = this.state.score
 
-    console.log('before', this.state);
-    this.setState(prevState => ({
-      currentQuestion: prevState.trivia[prevState.questionNumber + 1],
-      questionNumber: prevState.questionNumber + 1
-    }))
+    if (thisAnswer) {
+      newScore++
+    }
 
-    console.log('after', this.state)
+    if (thisQuestionNumber >= 10) {
+      this.setState({
+        questionNumber: parseInt(thisQuestionNumber) + 1,
+        score: newScore
+      }, () => {
+        localStorage.setItem('triviology-info', JSON.stringify(this.state))
+        console.log(this.state);
+      })
+
+    } else {
+      this.setState({
+        currentQuestion: this.state.trivia[thisQuestionNumber],
+        questionNumber: parseInt(thisQuestionNumber) + 1,
+        score: newScore
+      }, () => {
+        localStorage.setItem('triviology-info', JSON.stringify(this.state))
+        console.log(this.state);
+      })
+    }
   }
 
   componentDidMount = () => {
@@ -107,6 +125,8 @@ export default class App extends Component {
               render={() => {
                 return <Question
                   question={this.state.currentQuestion}
+                  number={this.state.questionNumber}
+                  score={this.state.score}
                   answerQuestion={this.answerQuestion}
                   />
               }}
