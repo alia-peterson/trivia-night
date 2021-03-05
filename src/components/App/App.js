@@ -62,24 +62,21 @@ export default class App extends Component {
     }
 
     if (thisQuestionNumber >= 10) {
-      this.setState({
-        questionNumber: parseInt(thisQuestionNumber) + 1,
-        score: newScore
-      }, () => {
-        localStorage.setItem('triviology-info', JSON.stringify(this.state))
-        console.log(this.state);
-      })
+      this.updateQuestion(thisQuestionNumber - 1, newScore)
 
     } else {
-      this.setState({
-        currentQuestion: this.state.trivia[thisQuestionNumber],
-        questionNumber: parseInt(thisQuestionNumber) + 1,
-        score: newScore
-      }, () => {
-        localStorage.setItem('triviology-info', JSON.stringify(this.state))
-        console.log(this.state);
-      })
+      this.updateQuestion(thisQuestionNumber, newScore)
     }
+  }
+
+  updateQuestion = (newNumber, newScore) => {
+    this.setState({
+      currentQuestion: this.state.trivia[newNumber],
+      questionNumber: parseInt(newNumber) + 1,
+      score: newScore
+    }, () => {
+      localStorage.setItem('triviology-info', JSON.stringify(this.state))
+    })
   }
 
   componentDidMount = () => {
