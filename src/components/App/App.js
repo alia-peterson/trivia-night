@@ -54,26 +54,34 @@ export default class App extends Component {
     const thisQuestionNumber = event.target.closest('article').id
     const thisAnswer = !event.target.classList.contains('incorrect')
     const thisQuestion = this.state.currentQuestion
-    thisQuestion.answer = thisAnswer
     let newScore = this.state.score
 
+    thisQuestion.answer = thisAnswer
     if (thisAnswer) {
       newScore++
     }
 
-    if (thisQuestionNumber >= 10) {
-      this.updateQuestion(thisQuestionNumber - 1, newScore)
-
-    } else {
-      this.updateQuestion(thisQuestionNumber, newScore)
-    }
+    this.updateQuestion(thisQuestionNumber, newScore)
   }
 
-  updateQuestion = (newNumber, newScore) => {
+  updateQuestion = (thisQuestionNumber, newScore) => {
+    if (thisQuestionNumber < 10) {
+      this.setState({ currentQuestion: this.state.trivia[thisQuestionNumber] })
+    }
+
     this.setState({
-      currentQuestion: this.state.trivia[newNumber],
-      questionNumber: parseInt(newNumber) + 1,
+      questionNumber: parseInt(thisQuestionNumber) + 1,
       score: newScore
+    }, () => {
+      localStorage.setItem('triviology-info', JSON.stringify(this.state))
+    })
+  }
+
+  restartTrivia = () => {
+    this.setState({
+      currentQuestion: this.state.trivia[0],
+      questionNumber: 1,
+      score: 0
     }, () => {
       localStorage.setItem('triviology-info', JSON.stringify(this.state))
     })
@@ -125,6 +133,7 @@ export default class App extends Component {
                   number={this.state.questionNumber}
                   score={this.state.score}
                   answerQuestion={this.answerQuestion}
+                  restart={this.restartTrivia}
                   />
               }}
               />
