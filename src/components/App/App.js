@@ -40,7 +40,7 @@ export default class App extends Component {
   populateTrivia = () => {
     const triviaInfo = Promise.resolve(fetchAPI.getTrivia('medium'))
     triviaInfo.then(trivia => {
-      trivia.results.forEach((question, index) => question.id = index)
+      trivia.results.forEach((question, index) => question.id = index + 1)
       this.setState({ trivia: trivia.results, currentQuestion: trivia.results[0] })
 
     }).then(() => {
@@ -51,19 +51,31 @@ export default class App extends Component {
   answerQuestion = (event) => {
     event.preventDefault()
     const thisQuestionNumber = event.target.closest('article').id
-    console.log(thisQuestionNumber);
+    const thisAnswer = !event.target.classList.contains('incorrect')
+    const thisQuestion = this.state.currentQuestion
+    thisQuestion.answer = thisAnswer
 
-    // check if clicked answer matches correct answer
-    // if so, add property answeredCorrectly (true/false) to object
-    // update trivia state
-    // move to next question
+    console.log('before', this.state);
+    this.setState(prevState => ({
+      currentQuestion: prevState.trivia[prevState.questionNumber + 1],
+      questionNumber: prevState.questionNumber + 1
+    }))
+
+    console.log('after', this.state)
   }
 
   componentDidMount = () => {
-    const storedInformation = JSON.parse(localStorage.getItem('triviology-info'))
+    const storedInformation = localStorage.getItem('triviology-info')
+    const parsedInformation = JSON.parse(storedInformation)
+
     if (storedInformation) {
-      console.log('stored', storedInformation);
-      this.setState({ storedInformation })
+      this.setState({
+        recipes: parsedInformation.recipes,
+        currentBeverage: parsedInformation.currentBeverage,
+        trivia: parsedInformation.trivia,
+        questionNumber: parsedInformation.questionNumber,
+        currentQuestion: parsedInformation.currentQuestion
+      })
     }
   }
 

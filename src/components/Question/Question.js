@@ -5,9 +5,10 @@ export default function Question({ question, answerQuestion }) {
   if (!question.category) {
     question = JSON.parse(localStorage.getItem('triviology-info')).currentQuestion
   }
-  
-  const incorrectAnswers = question.incorrect_answers.map(answer => {
+
+  const incorrectAnswers = question.incorrect_answers.map((answer, index) => {
     return <button
+      key={index}
       onClick={answerQuestion}
       className='incorrect'
       >
@@ -18,7 +19,7 @@ export default function Question({ question, answerQuestion }) {
   return (
     <div>
       <h2>Category: {question.category}</h2>
-      <article className='trivia-container' id={1}>
+      <article className='trivia-container' id={question.id}>
         <h2>Question:</h2>
         <p>{question.question}</p>
         <div>
