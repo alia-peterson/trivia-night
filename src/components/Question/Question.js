@@ -1,7 +1,7 @@
 import React from 'react'
 import './Question.css'
 
-export default function Question({ question, number, score, answerQuestion }) {
+export default function Question({ question, number, score, answerQuestion, restart }) {
   if (!question.category) {
     question = JSON.parse(localStorage.getItem('triviology-info')).currentQuestion
   }
@@ -20,11 +20,16 @@ export default function Question({ question, number, score, answerQuestion }) {
     <div>
       <h2>Category: {question.category}</h2>
       <article className='trivia-container' id={question.id}>
-        {number >= 10 ?
+        {number > 10 ?
           <div>
             <h2>Your Score:</h2>
             <p>You got {score} out of 10 correct!</p>
-            <button className='button'>Play Again</button>
+            <button
+              className='button'
+              onClick={restart}
+              >
+              Play Again
+            </button>
           </div> :
           <div>
             <h2>Question: {question.id}</h2>

@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import './Recipe.css'
 
 export default function Recipe({ recipe }) {
@@ -33,6 +34,9 @@ export default function Recipe({ recipe }) {
       <h3>{recipe.strDrink}</h3>
       <ul>{ingredients}</ul>
       <p>{instructions}</p>
+      <Link to='./trivia'>
+        <button className='button'>Start Trivia ></button>
+      </Link>
     </article>
   )
 }
