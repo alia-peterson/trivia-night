@@ -18,7 +18,9 @@ export default class App extends Component {
     this.state = {
       recipes: [],
       currentBeverage: {},
-      trivia: []
+      trivia: [],
+      questionNumber: 1,
+      currentQuestion: {}
     }
   }
 
@@ -31,25 +33,38 @@ export default class App extends Component {
         recipes: recipe.drinks,
         currentBeverage: recipe.drinks[number]
       })
-      localStorage.setItem('trivia-info', JSON.stringify(this.state))
+      localStorage.setItem('triviology-info', JSON.stringify(this.state))
     })
   }
 
   populateTrivia = () => {
     const triviaInfo = Promise.resolve(fetchAPI.getTrivia('medium'))
     triviaInfo.then(trivia => {
-      trivia.results.forEach((question, index) => {
-        question.id = index
-      })
-      this.setState({ trivia: trivia.results })
+      trivia.results.forEach((question, index) => question.id = index)
+      this.setState({ trivia: trivia.results, currentQuestion: trivia.results[0] })
+
+    }).then(() => {
       localStorage.setItem('triviology-info', JSON.stringify(this.state))
     })
   }
 
-  answerTrivia = (event) => {
+  answerQuestion = (event) => {
     event.preventDefault()
-    const questionNumber = event.target.closest('article').id
-    console.log(questionNumber);
+    const thisQuestionNumber = event.target.closest('article').id
+    console.log(thisQuestionNumber);
+
+    // check if clicked answer matches correct answer
+    // if so, add property answeredCorrectly (true/false) to object
+    // update trivia state
+    // move to next question
+  }
+
+  componentDidMount = () => {
+    const storedInformation = JSON.parse(localStorage.getItem('triviology-info'))
+    if (storedInformation) {
+      console.log('stored', storedInformation);
+      this.setState({ storedInformation })
+    }
   }
 
   render() {
@@ -79,8 +94,8 @@ export default class App extends Component {
               exact path='/trivia'
               render={() => {
                 return <Question
-                  questions={this.state.trivia}
-                  answerQuestion={this.answerTrivia}
+                  question={this.state.currentQuestion}
+                  answerQuestion={this.answerQuestion}
                   />
               }}
               />
