@@ -1,20 +1,14 @@
-import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import './Form.css'
 
 export default function Form({ populateRecipe, populateTrivia }) {
-  const [drinkBase, setDrinkBase] = useState('')
-  const [triviaDifficulty, setTriviaDifficulty] = useState([])
 
   return (
     <article className='form-container'>
       <form className='form'>
         <label htmlFor='dropdown-drinks'>Drink Base:</label>
         <select
-          onChange={(event) => {
-            setDrinkBase()
-            populateRecipe(event.target.value)
-          }}
+          onChange={(event) => populateRecipe(event.target.value)}
           className='dropdown'
           id='dropdown-drinks'
           >
@@ -24,10 +18,7 @@ export default function Form({ populateRecipe, populateTrivia }) {
         </select>
         <label htmlFor='dropdown-trivia'>Trivia Difficulty:</label>
         <select
-          onChange={() => {
-            setTriviaDifficulty()
-            populateTrivia()
-          }}
+          onChange={(event) => populateTrivia(event.target.value)}
           className='dropdown'
           id='dropdown-trivia'
           >
