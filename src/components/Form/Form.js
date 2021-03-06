@@ -11,9 +11,9 @@ export default function Form({ populateRecipe, populateTrivia }) {
       <form className='form'>
         <label htmlFor='dropdown-drinks'>Drink Base:</label>
         <select
-          onChange={() => {
+          onChange={(event) => {
             setDrinkBase()
-            populateRecipe()
+            populateRecipe(event.target.value)
           }}
           className='dropdown'
           id='dropdown-drinks'

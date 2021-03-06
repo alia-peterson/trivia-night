@@ -25,15 +25,26 @@ export default class App extends Component {
     }
   }
 
-  populateRecipe = (event) => {
-    const recipeInfo = Promise.resolve(fetchAPI.getRecipe())
+  populateRecipe = (drinkBase) => {
+    this.populateAllRecipes(drinkBase)
+      .then(() => this.populateCurrentBeverage())
+  }
+
+  populateAllRecipes = (drinkBase) => {
+    const allRecipesByType = Promise.resolve(fetchAPI.getRecipesbyType(drinkBase))
+
+    return allRecipesByType.then(result => {
+      this.setState({ recipes: result.drinks })
+    })
+  }
+
+  populateCurrentBeverage = () => {
     const number = Math.floor(Math.random() * Math.floor(this.state.recipes.length))
+    const randomRecipeId = this.state.recipes[number].idDrink
+    const recipeInfo = Promise.resolve(fetchAPI.getRecipesbyId(randomRecipeId))
 
     recipeInfo.then(recipe => {
-      this.setState({
-        recipes: recipe.drinks,
-        currentBeverage: recipe.drinks[number]
-      })
+      this.setState({ currentBeverage: recipe.drinks[0] })
       localStorage.setItem('triviology-info', JSON.stringify(this.state))
     })
   }
