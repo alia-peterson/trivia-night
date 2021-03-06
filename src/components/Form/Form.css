@@ -17,6 +17,7 @@
   font-size: 20px;
   font-weight: bold;
   height: 100%;
+  width: 60%;
 }
 
 .dropdown,
@@ -38,4 +39,9 @@
 
 .button:disabled {
   cursor: default;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
 }
