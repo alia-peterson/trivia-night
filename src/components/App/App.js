@@ -117,7 +117,10 @@ export default class App extends Component {
     return (
       <Router>
         <div className='App'>
-          <Header />
+          <Header
+            recipeEnabled={this.state.currentBeverage.idDrink ? true : false}
+            triviaEnabled={this.state.currentQuestion.category ? true : false}
+            />
           <main className='main'>
             <Route
               exact path='/'
