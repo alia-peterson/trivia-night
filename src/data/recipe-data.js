@@ -1,4 +1,4 @@
-export default {
+const recipeData = {
   drinks: [
     {
       idDrink: '11007',
@@ -138,3 +138,5 @@ export default {
     }
   ]
 }
+
+export default recipeData

@@ -1,4 +1,4 @@
-export default {
+const triviaData = {
   response_code: 0,
   results: [
     {
@@ -121,3 +121,5 @@ export default {
     }
   ]
 }
+
+export default triviaData

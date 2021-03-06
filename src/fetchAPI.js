@@ -1,7 +1,4 @@
-import triviaData from './data/trivia-data'
-import recipeData from './data/recipe-data'
-
-export default {
+const fetchAPI = {
   getRecipesbyType(drinkBase) {
     return fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${drinkBase}`)
       .then(response => response.json())
@@ -20,3 +17,5 @@ export default {
       .catch(error => console.log(error))
   }
 }
+
+export default fetchAPI
