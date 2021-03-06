@@ -49,8 +49,8 @@ export default class App extends Component {
     })
   }
 
-  populateTrivia = () => {
-    const triviaInfo = Promise.resolve(fetchAPI.getTrivia('medium'))
+  populateTrivia = (difficulty) => {
+    const triviaInfo = Promise.resolve(fetchAPI.getTrivia(difficulty))
     triviaInfo.then(trivia => {
       trivia.results.forEach((question, index) => question.id = index + 1)
       this.setState({ trivia: trivia.results, currentQuestion: trivia.results[0] })
