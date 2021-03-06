@@ -21,6 +21,7 @@ export default class App extends Component {
       trivia: [],
       questionNumber: 1,
       currentQuestion: {},
+      answered: false,
       score: 0
     }
   }
@@ -72,7 +73,12 @@ export default class App extends Component {
       newScore++
     }
 
-    this.updateQuestion(thisQuestionNumber, newScore)
+    setTimeout(() => {
+      this.setState({ answered: false })
+      this.updateQuestion(thisQuestionNumber, newScore)
+    }, 1000)
+
+    this.setState({ answered: true })
   }
 
   updateQuestion = (thisQuestionNumber, newScore) => {
@@ -144,6 +150,7 @@ export default class App extends Component {
               render={() => {
                 return <Question
                   question={this.state.currentQuestion}
+                  answered={this.state.answered}
                   number={this.state.questionNumber}
                   score={this.state.score}
                   answerQuestion={this.answerQuestion}

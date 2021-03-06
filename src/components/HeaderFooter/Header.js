@@ -3,7 +3,6 @@ import { NavLink } from 'react-router-dom'
 import './Header.css'
 
 export default function Header({ recipeEnabled, triviaEnabled }) {
-  console.log(recipeEnabled);
   return (
     <header className='header'>
       <h1>Triviology</h1>
