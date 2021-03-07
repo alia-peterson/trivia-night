@@ -11,6 +11,7 @@ import Footer from '../HeaderFooter/Footer'
 import Form from '../Form/Form'
 import Recipe from '../Recipe/Recipe'
 import Question from '../Question/Question'
+import Preferences from '../Preferences/Preferences'
 
 export default class App extends Component {
   constructor() {
@@ -18,6 +19,8 @@ export default class App extends Component {
     this.state = {
       recipes: [],
       currentBeverage: {},
+      favoriteRecipes: [],
+      triviaCategories: [],
       trivia: [],
       questionNumber: 1,
       currentQuestion: {},
@@ -134,6 +137,12 @@ export default class App extends Component {
                   populateRecipe={this.populateRecipe}
                   populateTrivia={this.populateTrivia}
                   />
+              }}
+              />
+            <Route
+              exact path='/preferences'
+              render={() => {
+                return <Preferences />
               }}
               />
             <Route

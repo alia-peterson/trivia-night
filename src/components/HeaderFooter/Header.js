@@ -13,6 +13,12 @@ export default function Header({ recipeEnabled, triviaEnabled }) {
           >
           Home
         </NavLink>
+        <NavLink
+          exact to='/preferences'
+          className='nav-link'
+          >
+          Preferences
+        </NavLink>
         {recipeEnabled &&
           <NavLink
             exact to='/recipe'
