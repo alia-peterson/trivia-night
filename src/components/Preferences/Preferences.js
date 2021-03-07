@@ -2,13 +2,20 @@ import React from 'react'
 import './Preferences.css'
 
 export default function Preferences({ possibleCategories, userCategories, updateCategories }) {
-  if (userCategories.length === 0) {
-    userCategories = JSON.parse(localStorage.getItem('triviology-info')).userCategories
+  const storedUserCategories = localStorage.getItem('triviology-info')
+  if (storedUserCategories) {
+    const parsedUserCategories = JSON.parse(storedUserCategories).userCategories
+    userCategories = parsedUserCategories
+
+  } else if (userCategories.length === 0) {
+    userCategories = possibleCategories
   }
-  
+
   const categoryList = possibleCategories.map((category, index) => {
+    const foundCategory = userCategories.find(each => each.type === category.type)
     let defaultChecked
-    if (userCategories.includes(category)) {
+
+    if (foundCategory) {
       defaultChecked = true
     } else {
       defaultChecked = false
@@ -20,13 +27,14 @@ export default function Preferences({ possibleCategories, userCategories, update
       <input
         type='checkbox'
         defaultChecked={defaultChecked}
-        id={category}
+        id={category.type}
+        value={category.value}
         onChange={event => {
           updateCategories(event.target.id, event.target.checked)
         }}
         />
-      <label htmlFor={category}>
-        {category}
+      <label htmlFor={category.type}>
+        {category.type}
       </label>
     </li>
   })

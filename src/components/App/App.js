@@ -22,7 +22,7 @@ export default class App extends Component {
       currentBeverage: {},
       favoriteRecipes: [],
       allCategories: possibleCategories,
-      userCategories: [],
+      userCategories: possibleCategories,
       trivia: [],
       questionNumber: 1,
       currentQuestion: {},
@@ -56,7 +56,10 @@ export default class App extends Component {
   }
 
   populateTrivia = (difficulty) => {
-    const triviaInfo = Promise.resolve(fetchAPI.getTrivia(difficulty))
+    const random = Math.floor(Math.random() * Math.floor(this.state.userCategories.length))
+    const randomCategory = this.state.userCategories[random].value
+
+    const triviaInfo = Promise.resolve(fetchAPI.getTrivia(randomCategory, difficulty))
     triviaInfo.then(trivia => {
       trivia.results.forEach((question, index) => question.id = index + 1)
       this.setState({ trivia: trivia.results, currentQuestion: trivia.results[0] })
@@ -117,9 +120,13 @@ export default class App extends Component {
   }
 
   addCategory = (categoryName) => {
+    const thisCategory = this.state.allCategories.find(category => {
+      return category.type === categoryName
+    })
+
     this.setState(prevState => {
       return {
-        userCategories: [...prevState.userCategories, categoryName]
+        userCategories: [...prevState.userCategories, thisCategory]
       }
     }, () => {
       localStorage.setItem('triviology-info', JSON.stringify(this.state))
@@ -127,9 +134,11 @@ export default class App extends Component {
   }
 
   removeCategory = (categoryName) => {
+    console.log(this.state.userCategories);
     const updatedCategories = this.state.userCategories.filter(category => {
-      return category !== categoryName
+      return category.type !== categoryName
     })
+    console.log(updatedCategories);
 
     this.setState({ userCategories: updatedCategories }, () => {
       localStorage.setItem('triviology-info', JSON.stringify(this.state))

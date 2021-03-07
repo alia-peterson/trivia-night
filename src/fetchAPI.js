@@ -11,8 +11,8 @@ const fetchAPI = {
       .catch(error => console.log(error))
   },
 
-  getTrivia(difficulty) {
-    return fetch(`https://opentdb.com/api.php?amount=10&category=20&difficulty=${difficulty}`)
+  getTrivia(category, difficulty) {
+    return fetch(`https://opentdb.com/api.php?amount=10&category=${category}&difficulty=${difficulty}`)
       .then(response => response.json())
       .catch(error => console.log(error))
   }
