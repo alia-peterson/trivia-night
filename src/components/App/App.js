@@ -13,11 +13,13 @@ import Recipe from '../Recipe/Recipe'
 import Question from '../Question/Question'
 import Preferences from '../Preferences/Preferences'
 import possibleCategories from '../../data/trivia-categories'
+import possibleBases from '../../data/recipe-bases'
 
 export default class App extends Component {
   constructor() {
     super()
     this.state = {
+      allRecipeBases: possibleBases,
       recipes: [],
       currentBeverage: {},
       favoriteRecipes: [],
@@ -175,6 +177,7 @@ export default class App extends Component {
               exact path='/'
               render={() => {
                 return <Form
+                  possibleBases={this.state.allRecipeBases}
                   populateRecipe={this.populateRecipe}
                   populateTrivia={this.populateTrivia}
                   />
