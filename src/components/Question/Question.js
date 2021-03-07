@@ -14,8 +14,8 @@ export default function Question({ question, answered, number, score, answerQues
         key={index}
         onClick={answerQuestion}
         className='button incorrect'
+        dangerouslySetInnerHTML={{__html: answer}}
         >
-        {answer}
       </button>
     })
 
@@ -24,8 +24,8 @@ export default function Question({ question, answered, number, score, answerQues
         key={3}
         onClick={answerQuestion}
         className='button correct'
+        dangerouslySetInnerHTML={{__html: question.correct_answer}}
         >
-        {question.correct_answer}
       </button>
     )
 
@@ -51,7 +51,7 @@ export default function Question({ question, answered, number, score, answerQues
           </div> :
           <div>
             <h2>Question: {question.id}</h2>
-            <p>{question.question}</p>
+            <p dangerouslySetInnerHTML={{__html: question.question}} />
             <div className='button-container'>
               {possibleAnswers}
             </div>

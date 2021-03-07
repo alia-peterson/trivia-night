@@ -14,8 +14,9 @@ export default function Form({ possibleBases, populateRecipe, populateTrivia }) 
           onChange={(event) => populateRecipe(event.target.value)}
           className='dropdown'
           id='dropdown-drinks'
+          defaultValue="Choose drink base..."
           >
-          <option selected disabled>Choose drink base...</option>
+          <option disabled value="Choose drink base...">Choose drink base...</option>
           {recipeBases}
         </select>
         <label htmlFor='dropdown-trivia'>Trivia Difficulty:</label>
@@ -23,8 +24,9 @@ export default function Form({ possibleBases, populateRecipe, populateTrivia }) 
           onChange={(event) => populateTrivia(event.target.value)}
           className='dropdown'
           id='dropdown-trivia'
+          defaultValue='Choose trivia difficulty...'
           >
-          <option selected disabled>Choose trivia difficulty...</option>
+          <option disabled value='Choose trivia difficulty...'>Choose trivia difficulty...</option>
           <option value='easy'>Easy</option>
           <option value='medium'>Medium</option>
           <option value='hard'>Hard</option>

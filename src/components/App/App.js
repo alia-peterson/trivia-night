@@ -68,6 +68,7 @@ export default class App extends Component {
 
     }).then(() => {
       localStorage.setItem('triviology-info', JSON.stringify(this.state))
+      console.log(this.state.trivia);
     })
   }
 
