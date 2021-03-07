@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom'
 import './Form.css'
 
 export default function Form({ populateRecipe, populateTrivia }) {
-
   return (
     <article className='form-container'>
       <form className='form'>

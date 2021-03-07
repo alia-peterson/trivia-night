@@ -1,14 +1,25 @@
 import React from 'react'
 import './Preferences.css'
 
-export default function Preferences({ possibleCategories, updateCategories }) {
+export default function Preferences({ possibleCategories, userCategories, updateCategories }) {
+  if (userCategories.length === 0) {
+    userCategories = JSON.parse(localStorage.getItem('triviology-info')).userCategories
+  }
+  
   const categoryList = possibleCategories.map((category, index) => {
+    let defaultChecked
+    if (userCategories.includes(category)) {
+      defaultChecked = true
+    } else {
+      defaultChecked = false
+    }
+
     return <li
       key={index}
       >
       <input
         type='checkbox'
-        defaultChecked={true}
+        defaultChecked={defaultChecked}
         id={category}
         onChange={event => {
           updateCategories(event.target.id, event.target.checked)

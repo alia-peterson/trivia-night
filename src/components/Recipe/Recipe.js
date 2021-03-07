@@ -27,7 +27,6 @@ export default function Recipe({ recipe }) {
     return <li key={index}>{ing}</li>
   })
 
-  // console.log('recipe name', recipe);
   return (
     <article className='recipe-container'>
       <h2>Beverage Recipe:</h2>

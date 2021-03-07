@@ -22,7 +22,7 @@ export default class App extends Component {
       currentBeverage: {},
       favoriteRecipes: [],
       allCategories: possibleCategories,
-      userCategories: possibleCategories,
+      userCategories: [],
       trivia: [],
       questionNumber: 1,
       currentQuestion: {},
@@ -121,6 +121,8 @@ export default class App extends Component {
       return {
         userCategories: [...prevState.userCategories, categoryName]
       }
+    }, () => {
+      localStorage.setItem('triviology-info', JSON.stringify(this.state))
     })
   }
 
@@ -129,7 +131,9 @@ export default class App extends Component {
       return category !== categoryName
     })
 
-    this.setState({ userCategories: updatedCategories })
+    this.setState({ userCategories: updatedCategories }, () => {
+      localStorage.setItem('triviology-info', JSON.stringify(this.state))
+    })
   }
 
   componentDidMount = () => {
@@ -140,6 +144,8 @@ export default class App extends Component {
       this.setState({
         recipes: parsedInformation.recipes,
         currentBeverage: parsedInformation.currentBeverage,
+        favoriteRecipes: parsedInformation.favoriteRecipes,
+        userCategories: parsedInformation.userCategories,
         trivia: parsedInformation.trivia,
         questionNumber: parsedInformation.questionNumber,
         currentQuestion: parsedInformation.currentQuestion
@@ -170,6 +176,7 @@ export default class App extends Component {
               render={() => {
                 return <Preferences
                   possibleCategories={this.state.allCategories}
+                  userCategories={this.state.userCategories}
                   updateCategories={this.updateUserCategories}
                   />
               }}
