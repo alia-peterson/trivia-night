@@ -12,6 +12,7 @@ import Form from '../Form/Form'
 import Recipe from '../Recipe/Recipe'
 import Question from '../Question/Question'
 import Preferences from '../Preferences/Preferences'
+import possibleCategories from '../../data/trivia-categories'
 
 export default class App extends Component {
   constructor() {
@@ -20,7 +21,8 @@ export default class App extends Component {
       recipes: [],
       currentBeverage: {},
       favoriteRecipes: [],
-      triviaCategories: [],
+      allCategories: possibleCategories,
+      userCategories: possibleCategories,
       trivia: [],
       questionNumber: 1,
       currentQuestion: {},
@@ -106,6 +108,30 @@ export default class App extends Component {
     })
   }
 
+  updateUserCategories = (categoryName, changeType) => {
+    if (changeType) {
+      this.addCategory(categoryName)
+    } else {
+      this.removeCategory(categoryName)
+    }
+  }
+
+  addCategory = (categoryName) => {
+    this.setState(prevState => {
+      return {
+        userCategories: [...prevState.userCategories, categoryName]
+      }
+    })
+  }
+
+  removeCategory = (categoryName) => {
+    const updatedCategories = this.state.userCategories.filter(category => {
+      return category !== categoryName
+    })
+
+    this.setState({ userCategories: updatedCategories })
+  }
+
   componentDidMount = () => {
     const storedInformation = localStorage.getItem('triviology-info')
     const parsedInformation = JSON.parse(storedInformation)
@@ -142,7 +168,10 @@ export default class App extends Component {
             <Route
               exact path='/preferences'
               render={() => {
-                return <Preferences />
+                return <Preferences
+                  possibleCategories={this.state.allCategories}
+                  updateCategories={this.updateUserCategories}
+                  />
               }}
               />
             <Route
