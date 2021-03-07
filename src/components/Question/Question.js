@@ -2,33 +2,37 @@ import React from 'react'
 import './Question.css'
 
 export default function Question({ question, answered, number, score, answerQuestion, restart }) {
+  let possibleAnswers
+
   if (!question.category) {
     question = JSON.parse(localStorage.getItem('triviology-info')).currentQuestion
   }
 
-  const incorrectAnswers = question.incorrect_answers.map((answer, index) => {
-    return <button
-      key={index}
-      onClick={answerQuestion}
-      className='button incorrect'
-      >
-      {answer}
-    </button>
-  })
+  if (question.correct_answer) {
+    const incorrectAnswers = question.incorrect_answers.map((answer, index) => {
+      return <button
+        key={index}
+        onClick={answerQuestion}
+        className='button incorrect'
+        >
+        {answer}
+      </button>
+    })
 
-  const correctAnswer = (
-    <button
-      key={3}
-      onClick={answerQuestion}
-      className='button correct'
-      >
-      {question.correct_answer}
-    </button>
-  )
+    const correctAnswer = (
+      <button
+        key={3}
+        onClick={answerQuestion}
+        className='button correct'
+        >
+        {question.correct_answer}
+      </button>
+    )
 
-  const random = Math.floor(Math.random() * Math.floor(incorrectAnswers.length))
-  const possibleAnswers = incorrectAnswers
-  possibleAnswers.splice(random, 0, correctAnswer)
+    const random = Math.floor(Math.random() * Math.floor(incorrectAnswers.length))
+    possibleAnswers = incorrectAnswers
+    possibleAnswers.splice(random, 0, correctAnswer)
+  }
 
   return (
     <div>
