@@ -16,6 +16,20 @@ export default function Question({ question, answered, number, score, answerQues
     </button>
   })
 
+  const correctAnswer = (
+    <button
+      key={3}
+      onClick={answerQuestion}
+      className='button correct'
+      >
+      {question.correct_answer}
+    </button>
+  )
+
+  const random = Math.floor(Math.random() * Math.floor(incorrectAnswers.length))
+  const possibleAnswers = incorrectAnswers
+  possibleAnswers.splice(random, 0, correctAnswer)
+
   return (
     <div>
       <h2>Category: {question.category}</h2>
@@ -35,13 +49,7 @@ export default function Question({ question, answered, number, score, answerQues
             <h2>Question: {question.id}</h2>
             <p>{question.question}</p>
             <div className='button-container'>
-              <button
-                onClick={answerQuestion}
-                className='button correct'
-                >
-                {question.correct_answer}
-              </button>
-              {incorrectAnswers}
+              {possibleAnswers}
             </div>
           </div>
         }

@@ -26,7 +26,7 @@ export default function Form({ populateRecipe, populateTrivia }) {
           <option value='medium'>Medium</option>
           <option value='hard'>Hard</option>
         </select>
-        <div className='button-container'>
+        <div className='button-form-container'>
           <Link to='/recipe'>
             <button className='button'>
               View Recipe

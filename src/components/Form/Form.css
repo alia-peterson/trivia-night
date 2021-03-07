@@ -41,7 +41,7 @@
   cursor: default;
 }
 
-.button-container {
+.button-form-container {
   display: flex;
   justify-content: space-between;
 }

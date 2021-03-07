@@ -72,13 +72,12 @@ export default class App extends Component {
     if (thisAnswer) {
       newScore++
     }
+    this.setState({ answered: true })
 
     setTimeout(() => {
       this.setState({ answered: false })
       this.updateQuestion(thisQuestionNumber, newScore)
     }, 1000)
-
-    this.setState({ answered: true })
   }
 
   updateQuestion = (thisQuestionNumber, newScore) => {
