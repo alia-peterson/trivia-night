@@ -1,0 +1,125 @@
+{
+    "response_code": 0,
+    "results": [
+        {
+            "category": "Mythology",
+            "type": "multiple",
+            "difficulty": "medium",
+            "question": "Neptune&#039;s greek name was...",
+            "correct_answer": "Poseidon",
+            "incorrect_answers": [
+                "Ares",
+                "Zeus",
+                "Apollo"
+            ]
+        },
+        {
+            "category": "Mythology",
+            "type": "multiple",
+            "difficulty": "medium",
+            "question": "A minotaur is half human half what?",
+            "correct_answer": "Bull",
+            "incorrect_answers": [
+                "Cow",
+                "Horse",
+                "Eagle"
+            ]
+        },
+        {
+            "category": "Mythology",
+            "type": "multiple",
+            "difficulty": "medium",
+            "question": "What is the name of the Greek god of blacksmiths?",
+            "correct_answer": "Hephaestus",
+            "incorrect_answers": [
+                "Dyntos",
+                "Vulcan",
+                "Artagatus"
+            ]
+        },
+        {
+            "category": "Mythology",
+            "type": "multiple",
+            "difficulty": "medium",
+            "question": "Which of the following is not one of the Greek Fates?",
+            "correct_answer": "Narcissus",
+            "incorrect_answers": [
+                "Clotho",
+                "Atropos",
+                "Lachesis"
+            ]
+        },
+        {
+            "category": "Mythology",
+            "type": "multiple",
+            "difficulty": "medium",
+            "question": "In African mythology, Anansi is a trickster and storyteller who takes the shape of which animal?",
+            "correct_answer": "Spider",
+            "incorrect_answers": [
+                "Wild dog",
+                "Monkey",
+                "Crocodile"
+            ]
+        },
+        {
+            "category": "Mythology",
+            "type": "multiple",
+            "difficulty": "medium",
+            "question": "Who is the god of war in Polynesian mythology?",
+            "correct_answer": "&#039;Oro",
+            "incorrect_answers": [
+                "Hina",
+                "Kohara",
+                "Māui"
+            ]
+        },
+        {
+            "category": "Mythology",
+            "type": "multiple",
+            "difficulty": "medium",
+            "question": "The Norse god Odin has two pet crows named &quot;Huginn&quot; and &quot;Muninn&quot;.  What do their names mean?",
+            "correct_answer": "Thought &amp; Memory",
+            "incorrect_answers": [
+                "Power &amp; Peace",
+                "War &amp; Learning",
+                "Sleeping &amp; Waking"
+            ]
+        },
+        {
+            "category": "Mythology",
+            "type": "multiple",
+            "difficulty": "medium",
+            "question": "What is the name of the first human being in Norse mythology?",
+            "correct_answer": "Ask",
+            "incorrect_answers": [
+                "Asmund",
+                "Ake",
+                "Asger"
+            ]
+        },
+        {
+            "category": "Mythology",
+            "type": "multiple",
+            "difficulty": "medium",
+            "question": "Hel was the daughter of which Norse Mythological figure?",
+            "correct_answer": "Loki",
+            "incorrect_answers": [
+                "Thor",
+                "Odin",
+                "Balder"
+            ]
+        },
+        {
+            "category": "Mythology",
+            "type": "multiple",
+            "difficulty": "medium",
+            "question": "What animal did Queen Pasipahe sleep with before she gave birth to the Minotaur in Greek Mythology?",
+            "correct_answer": "Bull",
+            "incorrect_answers": [
+                "Pig",
+                "Ox",
+                "Horse"
+            ]
+        }
+    ]
+}

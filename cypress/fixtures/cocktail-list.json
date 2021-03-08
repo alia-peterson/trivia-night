@@ -1,0 +1,34 @@
+{
+    "drinks": [
+        {
+            "strDrink": "110 in the shade",
+            "strDrinkThumb": "https://www.thecocktaildb.com/images/media/drink/xxyywq1454511117.jpg",
+            "idDrink": "15423"
+        },
+        {
+            "strDrink": "Margarita",
+            "strDrinkThumb": "https://www.thecocktaildb.com/images/media/drink/5noda61589575158.jpg",
+            "idDrink": "11007"
+        },
+        {
+            "strDrink": "Moranguito",
+            "strDrinkThumb": "https://www.thecocktaildb.com/images/media/drink/urpsyq1475667335.jpg",
+            "idDrink": "16196"
+        },
+        {
+            "strDrink": "Paloma",
+            "strDrinkThumb": "https://www.thecocktaildb.com/images/media/drink/samm5j1513706393.jpg",
+            "idDrink": "17253"
+        },
+        {
+            "strDrink": "Pineapple Paloma",
+            "strDrinkThumb": "https://www.thecocktaildb.com/images/media/drink/pg8iw31593351601.jpg",
+            "idDrink": "178327"
+        },
+        {
+            "strDrink": "Radioactive Long Island Iced Tea",
+            "strDrinkThumb": "https://www.thecocktaildb.com/images/media/drink/rdvqmh1503563512.jpg",
+            "idDrink": "16984"
+        }
+    ]
+}
