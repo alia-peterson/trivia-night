@@ -5,6 +5,7 @@ export default function Footer() {
     <footer className='footer'>
       <a
         href='https://opentdb.com/api_config.php'
+        name='triviaAPI'
         target='_blank'
         rel="noreferrer"
         >
@@ -12,6 +13,7 @@ export default function Footer() {
       </a>
       <a
         href='https://www.thecocktaildb.com/api.php'
+        name='cocktailAPI'
         target='_blank'
         rel="noreferrer"
         >

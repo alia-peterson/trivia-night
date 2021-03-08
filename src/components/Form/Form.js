@@ -14,6 +14,7 @@ export default function Form({ possibleBases, populateRecipe, populateTrivia, re
           onChange={(event) => populateRecipe(event.target.value)}
           className='dropdown'
           id='dropdown-drinks'
+          name='dropdown-cocktail'
           defaultValue="Choose drink base..."
           >
           <option disabled value="Choose drink base...">Choose drink base...</option>
@@ -24,6 +25,7 @@ export default function Form({ possibleBases, populateRecipe, populateTrivia, re
           onChange={(event) => populateTrivia(event.target.value)}
           className='dropdown'
           id='dropdown-trivia'
+          name='dropdown-trivia'
           defaultValue='Choose trivia difficulty...'
           >
           <option disabled value='Choose trivia difficulty...'>Choose trivia difficulty...</option>
@@ -35,6 +37,7 @@ export default function Form({ possibleBases, populateRecipe, populateTrivia, re
           <Link to='/recipe'>
             <button
               className='button'
+              name='recipe-button'
               disabled={recipeEnabled}
               >
               View Recipe
@@ -43,6 +46,7 @@ export default function Form({ possibleBases, populateRecipe, populateTrivia, re
           <Link to='/trivia'>
             <button
               className='button'
+              name='trivia-button'
               disabled={triviaEnabled}
               >
               View Trivia

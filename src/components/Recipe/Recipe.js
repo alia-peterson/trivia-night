@@ -15,6 +15,7 @@ export default function Recipe({ recipe, newBeverage, triviaEnabled, isFavorite,
           />
         <button
           className='button'
+          name='button-new-recipe'
           onClick={newBeverage}
           >
           Generate New Beverage
