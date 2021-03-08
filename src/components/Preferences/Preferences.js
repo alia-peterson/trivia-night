@@ -1,7 +1,8 @@
 import React from 'react'
+import Card from '../Recipe/Card'
 import './Preferences.css'
 
-export default function Preferences({ possibleCategories, userCategories, updateCategories }) {
+export default function Preferences({ possibleCategories, userCategories, updateCategories, favoriteRecipes, isFavorite, toggleFavorite }) {
   const storedUserCategories = localStorage.getItem('triviology-info')
   if (storedUserCategories) {
     const parsedUserCategories = JSON.parse(storedUserCategories).userCategories
@@ -39,11 +40,32 @@ export default function Preferences({ possibleCategories, userCategories, update
     </li>
   })
 
+  const favRecipes = favoriteRecipes.map((recipe, index) => {
+    return (
+      <article
+        key={index}
+        className='favorite-card'
+        id={recipe.idDrink}
+        >
+        <Card
+          recipe={recipe}
+          isFavorite={isFavorite}
+          toggleFavorite={toggleFavorite}
+          />
+      </article>
+    )
+  })
+
   return (
-    <section>
-      <h2>Possible Categories:</h2>
-      <ul className='categories'>{categoryList}</ul>
-      <h2>Favorite Beverage Recipes:</h2>
-    </section>
+    <>
+      <section>
+        <h2>Trivia Categories:</h2>
+        <ul className='categories'>{categoryList}</ul>
+      </section>
+      <section>
+        <h2>Favorite Beverage Recipes:</h2>
+        <div className='favorite-container'>{favRecipes}</div>
+      </section>
+    </>
   )
 }

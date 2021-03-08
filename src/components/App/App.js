@@ -229,6 +229,8 @@ export default class App extends Component {
                   userCategories={this.state.userCategories}
                   updateCategories={this.updateUserCategories}
                   favoriteRecipes={this.state.favoriteRecipes}
+                  isFavorite={true}
+                  toggleFavorite={this.toggleFavoriteRecipe}
                   />
               }}
               />
@@ -239,7 +241,11 @@ export default class App extends Component {
                   recipe={this.state.currentBeverage}
                   newBeverage={this.populateCurrentBeverage}
                   triviaEnabled={this.state.currentQuestion.question ? false : true}
-                  isFavorite={this.state.currentBeverage.favorite === true ? true : false}
+                  isFavorite={this.state.favoriteRecipes.find(recipe => {
+                    return recipe.idDrink === this.state.currentBeverage.idDrink}) ?
+                    true :
+                    false
+                  }
                   toggleFavorite={this.toggleFavoriteRecipe}
                   />
               }}
