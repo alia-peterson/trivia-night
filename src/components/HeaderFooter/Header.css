@@ -1,6 +1,6 @@
 .header,
 .footer {
-  background-color: #6E9CA5;
+  background-color: #0075A2;
   display: flex;
   font-weight: bold;
   justify-content: space-between;
@@ -14,7 +14,13 @@
 
 .footer {
   align-items: center;
-  height: 80px;
+  color: white;
+  height: 40px;
+  font-size: 18px;
+}
+
+.footer a:visited {
+  color: white;
 }
 
 .nav-container {
@@ -35,6 +41,10 @@
 
 .nav-link:disabled {
   cursor: default;
+}
+
+.nav-link:visited {
+  color: black;
 }
 
 a:link {

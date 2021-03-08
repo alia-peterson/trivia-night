@@ -3,7 +3,6 @@
 }
 
 .App {
-  background-color: #001B24;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -15,4 +14,5 @@
   align-items: center;
   display: flex;
   flex-direction: column;
+  overflow: scroll;
 }
