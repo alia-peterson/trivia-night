@@ -4,6 +4,7 @@ import {
   Route
 } from 'react-router-dom'
 import fetchAPI from '../../fetchAPI'
+import utilities from '../../utilities'
 import './App.css'
 
 import Header from '../HeaderFooter/Header'
@@ -33,6 +34,7 @@ export default class App extends Component {
     }
   }
 
+  // Recipe functions
   populateRecipe = (drinkBase) => {
     this.populateAllRecipes(drinkBase)
       .then(() => this.populateCurrentBeverage())
@@ -52,11 +54,13 @@ export default class App extends Component {
     const recipeInfo = Promise.resolve(fetchAPI.getRecipesbyId(randomRecipeId))
 
     recipeInfo.then(recipe => {
-      this.setState({ currentBeverage: recipe.drinks[0] })
+      const cleanedRecipe = utilities.cleanRecipeData(recipe.drinks[0])
+      this.setState({ currentBeverage: cleanedRecipe })
       localStorage.setItem('triviology-info', JSON.stringify(this.state))
     })
   }
 
+  // Trivia functions
   populateTrivia = (difficulty) => {
     const random = Math.floor(Math.random() * Math.floor(this.state.userCategories.length))
     const randomCategory = this.state.userCategories[random].value
@@ -119,6 +123,7 @@ export default class App extends Component {
     this.restartTrivia()
   }
 
+  // User preference functions
   updateUserCategories = (categoryName, changeType) => {
     if (changeType) {
       this.addCategory(categoryName)
@@ -153,6 +158,7 @@ export default class App extends Component {
     })
   }
 
+  // App component functions
   componentDidMount = () => {
     const storedInformation = localStorage.getItem('triviology-info')
     const parsedInformation = JSON.parse(storedInformation)
