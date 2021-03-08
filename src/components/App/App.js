@@ -68,7 +68,6 @@ export default class App extends Component {
 
     }).then(() => {
       localStorage.setItem('triviology-info', JSON.stringify(this.state))
-      console.log(this.state.trivia);
     })
   }
 
@@ -112,6 +111,12 @@ export default class App extends Component {
     }, () => {
       localStorage.setItem('triviology-info', JSON.stringify(this.state))
     })
+  }
+
+  startNewTrivia = () => {
+    const currentDifficulty = this.state.currentQuestion.difficulty
+    this.populateTrivia(currentDifficulty)
+    this.restartTrivia()
   }
 
   updateUserCategories = (categoryName, changeType) => {
@@ -181,6 +186,8 @@ export default class App extends Component {
                   possibleBases={this.state.allRecipeBases}
                   populateRecipe={this.populateRecipe}
                   populateTrivia={this.populateTrivia}
+                  recipeEnabled={this.state.currentBeverage.strDrink ? false : true}
+                  triviaEnabled={this.state.currentQuestion.question ? false : true}
                   />
               }}
               />
@@ -212,6 +219,7 @@ export default class App extends Component {
                   score={this.state.score}
                   answerQuestion={this.answerQuestion}
                   restart={this.restartTrivia}
+                  newGame={this.startNewTrivia}
                   />
               }}
               />

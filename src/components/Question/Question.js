@@ -1,7 +1,7 @@
 import React from 'react'
 import './Question.css'
 
-export default function Question({ question, answered, number, score, answerQuestion, restart }) {
+export default function Question({ question, answered, number, score, answerQuestion, restart, newGame }) {
   let possibleAnswers
 
   if (!question.category) {
@@ -18,6 +18,8 @@ export default function Question({ question, answered, number, score, answerQues
         >
       </button>
     })
+    // dangerouslySetInnerHTML is a solution i'm tolerating for now as i can't
+    // find a better solution for interpreting html characters
 
     const correctAnswer = (
       <button
@@ -42,12 +44,20 @@ export default function Question({ question, answered, number, score, answerQues
           <div>
             <h2>Your Score:</h2>
             <p>You got {score} out of 10 correct!</p>
-            <button
-              className='button'
-              onClick={restart}
-              >
-              Play Again
-            </button>
+            <div className='button-container'>
+              <button
+                className='button'
+                onClick={restart}
+                >
+                Play Again
+              </button>
+              <button
+                className='button'
+                onClick={newGame}
+                >
+                New Game
+              </button>
+            </div>
           </div> :
           <div>
             <h2>Question: {question.id}</h2>

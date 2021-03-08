@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import './Form.css'
 
-export default function Form({ possibleBases, populateRecipe, populateTrivia }) {
+export default function Form({ possibleBases, populateRecipe, populateTrivia, recipeEnabled, triviaEnabled }) {
   const recipeBases = possibleBases.map((base, index) => {
     return <option key={index} value={base}>{base}</option>
   })
@@ -33,12 +33,18 @@ export default function Form({ possibleBases, populateRecipe, populateTrivia }) 
         </select>
         <div className='button-form-container'>
           <Link to='/recipe'>
-            <button className='button'>
+            <button
+              className='button'
+              disabled={recipeEnabled}
+              >
               View Recipe
             </button>
           </Link>
           <Link to='/trivia'>
-            <button className='button'>
+            <button
+              className='button'
+              disabled={triviaEnabled}
+              >
               View Trivia
             </button>
           </Link>
