@@ -32,7 +32,6 @@ export default function Question({ question, answered, number, score, answerQues
     const answers = question.incorrect_answers
     const random = Math.floor(Math.random() * Math.floor(answers.length))
     answers.splice(random, 0, question.correct_answer)
-    console.log(answers);
     setPossibleAnswers(answers)
   }, [question])
 
@@ -47,12 +46,14 @@ export default function Question({ question, answered, number, score, answerQues
             <div className='button-container'>
               <button
                 className='button'
+                name='button-restart'
                 onClick={restart}
                 >
                 Play Again
               </button>
               <button
                 className='button'
+                name='button-newgame'
                 onClick={newGame}
                 >
                 New Game
@@ -60,7 +61,7 @@ export default function Question({ question, answered, number, score, answerQues
             </div>
           </> :
           <>
-            <h2>Question {question.id} of 10:</h2>
+            <h3>Question {question.id} of 10:</h3>
             <p dangerouslySetInnerHTML={{__html: question.question}} />
             <div className='button-container'>
               {allAnswers}
