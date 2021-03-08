@@ -1,0 +1,43 @@
+.fav-icon {
+  margin-right: 95%;
+}
+
+.fav-icon:hover {
+  cursor: pointer;
+}
+
+.recipe-name {
+  text-decoration: underline;
+}
+
+.recipe-heading {
+  text-align: left;
+  margin-bottom: 0;
+  width: 100%;
+}
+
+.recipe-inst-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.recipe-inst {
+  text-align: left;
+  width: 100%;
+}
+
+.recipe-image {
+  object-fit: contain;
+  margin-right: 2rem;
+  width: 180px;
+}
+
+.recipe-ingr {
+  padding: 0;
+}
+
+.recipe-ingr li {
+  list-style: none;
+  text-align: left;
+}

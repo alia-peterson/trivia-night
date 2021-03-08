@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function Footer() {
   return (
-    <section className='footer'>
+    <footer className='footer'>
       <a
         href='https://opentdb.com/api_config.php'
         target='_blank'
@@ -17,6 +17,6 @@ export default function Footer() {
         >
         Cocktail API
       </a>
-    </section>
+    </footer>
   )
 }
