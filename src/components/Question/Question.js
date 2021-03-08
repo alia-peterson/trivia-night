@@ -60,7 +60,7 @@ export default function Question({ question, answered, number, score, answerQues
             </div>
           </div> :
           <div>
-            <h2>Question: {question.id}</h2>
+            <h2>Question {question.id} of 10:</h2>
             <p dangerouslySetInnerHTML={{__html: question.question}} />
             <div className='button-container'>
               {possibleAnswers}

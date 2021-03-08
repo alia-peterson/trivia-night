@@ -207,6 +207,7 @@ export default class App extends Component {
                 return <Recipe
                   recipe={this.state.currentBeverage}
                   newBeverage={this.populateCurrentBeverage}
+                  triviaEnabled={this.state.currentQuestion.question ? false : true}
                   />
               }}
               />
