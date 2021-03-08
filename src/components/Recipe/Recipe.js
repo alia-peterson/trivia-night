@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import './Recipe.css'
 
-export default function Recipe({ recipe }) {
+export default function Recipe({ recipe, newBeverage }) {
   const instructions = recipe.strInstructions
   const ingredientDescriptions = Object.values(recipe)
   const ingredientProperties = Object.keys(recipe)
@@ -33,6 +33,12 @@ export default function Recipe({ recipe }) {
       <h3>{recipe.strDrink}</h3>
       <ul>{ingredients}</ul>
       <p>{instructions}</p>
+      <button
+        className='button'
+        onClick={newBeverage}
+        >
+        Generate New Beverage
+      </button>
       <Link to='./trivia'>
         <button className='button'>Start Trivia ></button>
       </Link>

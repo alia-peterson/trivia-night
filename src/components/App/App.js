@@ -206,6 +206,7 @@ export default class App extends Component {
               render={() => {
                 return <Recipe
                   recipe={this.state.currentBeverage}
+                  newBeverage={this.populateCurrentBeverage}
                   />
               }}
               />
