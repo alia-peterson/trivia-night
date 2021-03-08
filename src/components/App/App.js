@@ -60,6 +60,32 @@ export default class App extends Component {
     })
   }
 
+  toggleFavoriteRecipe = (event) => {
+    const thisRecipeId = event.target.closest('article').id
+    const foundRecipe = this.state.favoriteRecipes.find(recipe => {
+      return recipe.idDrink === thisRecipeId
+    })
+
+    const updatedBeverage = this.state.currentBeverage
+    const updatedFavorites = this.state.favoriteRecipes
+
+    if (foundRecipe) {
+      const recipeIndex = updatedFavorites.indexOf(foundRecipe)
+      updatedBeverage.favorite = false
+      updatedFavorites.splice(recipeIndex, 1)
+
+    } else {
+      updatedBeverage.favorite = true
+      updatedFavorites.push(this.state.currentBeverage)
+    }
+
+    this.setState({
+      currentBeverage: updatedBeverage,
+      favoriteRecipes: updatedFavorites
+
+    }, () => localStorage.setItem('triviology-info', JSON.stringify(this.state)))
+  }
+
   // Trivia functions
   populateTrivia = (difficulty) => {
     const random = Math.floor(Math.random() * Math.floor(this.state.userCategories.length))
@@ -147,11 +173,9 @@ export default class App extends Component {
   }
 
   removeCategory = (categoryName) => {
-    console.log(this.state.userCategories);
     const updatedCategories = this.state.userCategories.filter(category => {
       return category.type !== categoryName
     })
-    console.log(updatedCategories);
 
     this.setState({ userCategories: updatedCategories }, () => {
       localStorage.setItem('triviology-info', JSON.stringify(this.state))
@@ -204,6 +228,7 @@ export default class App extends Component {
                   possibleCategories={this.state.allCategories}
                   userCategories={this.state.userCategories}
                   updateCategories={this.updateUserCategories}
+                  favoriteRecipes={this.state.favoriteRecipes}
                   />
               }}
               />
@@ -214,6 +239,8 @@ export default class App extends Component {
                   recipe={this.state.currentBeverage}
                   newBeverage={this.populateCurrentBeverage}
                   triviaEnabled={this.state.currentQuestion.question ? false : true}
+                  isFavorite={this.state.currentBeverage.favorite === true ? true : false}
+                  toggleFavorite={this.toggleFavoriteRecipe}
                   />
               }}
               />

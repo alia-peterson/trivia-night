@@ -13,6 +13,10 @@
   margin: 0.2rem;
 }
 
+.fav-icon:hover {
+  cursor: pointer;
+}
+
 .recipe-name {
   text-decoration: underline;
 }
