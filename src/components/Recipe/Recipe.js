@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import Card from './Card'
 import iconFilled from '../../assets/icon-heart-filled.png'
 import iconOutline from '../../assets/icon-heart-outline.png'
 import './Recipe.css'
@@ -44,22 +45,15 @@ export default function Recipe({ recipe, newBeverage, triviaEnabled, isFavorite,
     <div>
       <h2>Beverage Recipe:</h2>
       <article className='recipe-container' id={recipe.idDrink}>
-        <img
-          className='fav-icon'
-          src={favoriteIcon}
-          alt={iconAltText}
-          onClick={toggleFavorite}
+        <Card
+          drinkName={recipe.strDrink}
+          drinkImage={recipe.strDrinkThumb}
+          favoriteIcon={favoriteIcon}
+          iconAltText={iconAltText}
+          toggleFavorite={toggleFavorite}
+          ingredients={ingredients}
+          instructions={instructions}
           />
-        <div className='recipe-inst-container'>
-          <div>
-            <h3 className='recipe-name'>{recipe.strDrink}</h3>
-            <h4 className='recipe-heading'>Ingredients:</h4>
-            <ul className='recipe-ingr'>{ingredients}</ul>
-          </div>
-          <img className='recipe-image' src={recipe.strDrinkThumb} alt=''/>
-        </div>
-        <h4 className='recipe-heading'>Instructions:</h4>
-        <p className='recipe-inst'>{instructions}</p>
         <button
           className='button'
           onClick={newBeverage}
