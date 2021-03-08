@@ -205,8 +205,8 @@ export default class App extends Component {
       <Router>
         <div className='App'>
           <Header
-            recipeEnabled={this.state.currentBeverage.idDrink ? true : false}
-            triviaEnabled={this.state.currentQuestion.category ? true : false}
+            recipeEnabled={this.state.currentBeverage?.idDrink ? true : false}
+            triviaEnabled={this.state.currentQuestion?.category ? true : false}
             />
           <main className='main'>
             <Route
@@ -216,8 +216,8 @@ export default class App extends Component {
                   possibleBases={this.state.allRecipeBases}
                   populateRecipe={this.populateRecipe}
                   populateTrivia={this.populateTrivia}
-                  recipeEnabled={this.state.currentBeverage.strDrink ? false : true}
-                  triviaEnabled={this.state.currentQuestion.question ? false : true}
+                  recipeEnabled={this.state.currentBeverage?.strDrink ? false : true}
+                  triviaEnabled={this.state.currentQuestion?.question ? false : true}
                   />
               }}
               />
