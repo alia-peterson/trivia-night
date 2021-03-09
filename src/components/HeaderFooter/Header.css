@@ -35,6 +35,11 @@
   margin: 0 0.2rem;
 }
 
+.nav-link:focus {
+  background-color: #001B24;
+  color: white !important;
+}
+
 .nav-link:hover {
   cursor: pointer;
 }
