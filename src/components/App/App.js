@@ -173,9 +173,16 @@ export default class App extends Component {
   }
 
   removeCategory = (categoryName) => {
-    const updatedCategories = this.state.userCategories.filter(category => {
-      return category.type !== categoryName
-    })
+    let updatedCategories
+
+    if (this.state.userCategories.length === 1) {
+      updatedCategories = this.state.allCategories
+
+    } else {
+      updatedCategories = this.state.userCategories.filter(category => {
+        return category.type !== categoryName
+      })
+    }
 
     this.setState({ userCategories: updatedCategories }, () => {
       localStorage.setItem('triviology-info', JSON.stringify(this.state))
