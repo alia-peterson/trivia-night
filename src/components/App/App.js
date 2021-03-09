@@ -42,7 +42,8 @@ export default class App extends Component {
   }
 
   populateAllRecipes = (drinkBase) => {
-    const allRecipesByType = Promise.resolve(fetchAPI.getRecipesbyType(drinkBase))
+    const cocktailUrl = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${drinkBase}`
+    const allRecipesByType = Promise.resolve(fetchAPI.getInformation(cocktailUrl))
 
     return allRecipesByType.then(result => {
       this.setState({ recipes: result.drinks })
@@ -52,7 +53,8 @@ export default class App extends Component {
   populateCurrentBeverage = () => {
     const number = Math.floor(Math.random() * Math.floor(this.state.recipes.length))
     const randomRecipeId = this.state.recipes[number].idDrink
-    const recipeInfo = Promise.resolve(fetchAPI.getRecipesbyId(randomRecipeId))
+    const recipeUrl = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${randomRecipeId}`
+    const recipeInfo = Promise.resolve(fetchAPI.getInformation(recipeUrl))
 
     recipeInfo.then(recipe => {
       const cleanedRecipe = utilities.cleanRecipeData(recipe.drinks[0])
@@ -91,11 +93,16 @@ export default class App extends Component {
   populateTrivia = (difficulty) => {
     const random = Math.floor(Math.random() * Math.floor(this.state.userCategories.length))
     const randomCategory = this.state.userCategories[random].value
+    const triviaUrl = `https://opentdb.com/api.php?amount=10&category=${randomCategory}&difficulty=${difficulty}`
 
-    const triviaInfo = Promise.resolve(fetchAPI.getTrivia(randomCategory, difficulty))
+    const triviaInfo = Promise.resolve(fetchAPI.getInformation(triviaUrl))
     triviaInfo.then(trivia => {
       trivia.results.forEach((question, index) => question.id = index + 1)
-      this.setState({ trivia: trivia.results, currentQuestion: trivia.results[0] })
+      this.setState({
+        trivia: trivia.results,
+        questionNumber: 1,
+        currentQuestion: trivia.results[0]
+      })
 
     }).then(() => {
       localStorage.setItem('triviology-info', JSON.stringify(this.state))
