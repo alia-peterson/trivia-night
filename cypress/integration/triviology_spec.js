@@ -3,6 +3,7 @@ context('Triviology Website', () => {
 
   beforeEach(() => {
     cy.visit(baseUrl)
+    localStorage.removeItem('triviology-info')
   })
 
   it('Should display a header, a form, and a footer', () => {
@@ -74,7 +75,7 @@ context('Triviology Website', () => {
       .get('article p').should('have.text', 'Neptune\'s greek name was...')
   })
 
-  it('Should be able to play a game of trivia and view results', () => {
+  it('Should be able to play a game of trivia, view results, and start a new game', () => {
     cy.intercept('GET', 'difficulty', { fixture: 'trivia-response' }, {statusCode: 200, body: 'wow'})
       .get('select[name=dropdown-trivia]').select('Medium')
       .get('button[name=trivia-button]').click()
@@ -101,34 +102,6 @@ context('Triviology Website', () => {
       .get('article p').should('have.text', 'What animal did Queen Pasipahe sleep with before she gave birth to the Minotaur in Greek Mythology?')
       .get('article button.correct').click()
       .get('article p').should('have.text', 'You got 10 out of 10 correct!')
-  })
-
-  it('Should be able to start a new game of trivia', () => {
-    cy.intercept('GET', 'difficulty', { fixture: 'trivia-response' }, {statusCode: 200, body: 'wow'})
-      .get('select[name=dropdown-trivia]').select('Medium')
-      .get('button[name=trivia-button]').click()
-      .get('h2').should('have.text', 'Category: Mythology')
-      .get('article h3').should('have.text', 'Question 1 of 10:')
-      .get('article p').should('have.text', 'Neptune\'s greek name was...')
-      .get('article button.correct').click()
-      .get('article p').should('have.text', 'A minotaur is half human half what?')
-      .get('article button.correct').click()
-      .get('article p').should('have.text', 'What is the name of the Greek god of blacksmiths?')
-      .get('article button.correct').click()
-      .get('article p').should('have.text', 'Which of the following is not one of the Greek Fates?')
-      .get('article button.correct').click()
-      .get('article p').should('have.text', 'In African mythology, Anansi is a trickster and storyteller who takes the shape of which animal?')
-      .get('article button.correct').click()
-      .get('article p').should('have.text', 'Who is the god of war in Polynesian mythology?')
-      .get('article button.correct').click()
-      .get('article p').should('have.text', 'The Norse god Odin has two pet crows named "Huginn" and "Muninn".  What do their names mean?')
-      .get('article button.correct').click()
-      .get('article p').should('have.text', 'What is the name of the first human being in Norse mythology?')
-      .get('article button.correct').click()
-      .get('article p').should('have.text', 'Hel was the daughter of which Norse Mythological figure?')
-      .get('article button.correct').click()
-      .get('article p').should('have.text', 'What animal did Queen Pasipahe sleep with before she gave birth to the Minotaur in Greek Mythology?')
-      .get('article button.correct').click()
       .get('article button[name=button-newgame]').click()
       .get('article p').should('have.text', 'Neptune\'s greek name was...')
   })
@@ -137,5 +110,18 @@ context('Triviology Website', () => {
     cy.get('a[name=preferences]').click()
       .get('[type="checkbox"]:first').uncheck()
       .get('[type="checkbox"]:first').check()
+  })
+
+  it('Should handle bad API responses from trivia API', () => {
+    cy.intercept('GET', 'difficulty', {statusCode: 500, response: '{"error": "bad"}'})
+      .get('select[name=dropdown-trivia]').select('Medium')
+      .get('.error').should('have.text', 'Something went wrong. Please refresh the page and try again.')
+  })
+
+  it('Should handle bad API responses from cocktail API', () => {
+    cy.intercept('GET', 'Tequila', {statusCode: 500, response: '{"error": "bad"}'})
+      .intercept('GET', 'lookup', {statusCode: 500, response: '{"error": "bad"}'})
+      .get('select[name=dropdown-cocktail]').select('Tequila')
+      .get('.error').should('have.text', 'Something went wrong. Please refresh the page and try again.')
   })
 })

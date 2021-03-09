@@ -4,7 +4,6 @@ import {
   Route,
   Redirect
 } from 'react-router-dom'
-import fetchAPI from '../../fetchAPI'
 import utilities from '../../utilities'
 import './App.css'
 
@@ -43,24 +42,29 @@ export default class App extends Component {
 
   populateAllRecipes = (drinkBase) => {
     const cocktailUrl = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${drinkBase}`
-    const allRecipesByType = Promise.resolve(fetchAPI.getInformation(cocktailUrl))
+    const allRecipesByType = Promise.resolve(this.getApiInformation(cocktailUrl))
 
     return allRecipesByType.then(result => {
-      this.setState({ recipes: result.drinks })
+      if (result) {
+        this.setState({ recipes: result.drinks })
+      }
     })
   }
 
   populateCurrentBeverage = () => {
     const number = Math.floor(Math.random() * Math.floor(this.state.recipes.length))
-    const randomRecipeId = this.state.recipes[number].idDrink
-    const recipeUrl = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${randomRecipeId}`
-    const recipeInfo = Promise.resolve(fetchAPI.getInformation(recipeUrl))
 
-    recipeInfo.then(recipe => {
-      const cleanedRecipe = utilities.cleanRecipeData(recipe.drinks[0])
-      this.setState({ currentBeverage: cleanedRecipe })
-      localStorage.setItem('triviology-info', JSON.stringify(this.state))
-    })
+    if (this.state.recipes[number]) {
+      const randomRecipeId = this.state.recipes[number].idDrink
+      const recipeUrl = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${randomRecipeId}`
+      const recipeInfo = Promise.resolve(this.getApiInformation(recipeUrl))
+
+      recipeInfo.then(recipe => {
+        const cleanedRecipe = utilities.cleanRecipeData(recipe.drinks[0])
+        this.setState({ currentBeverage: cleanedRecipe })
+        localStorage.setItem('triviology-info', JSON.stringify(this.state))
+      })
+    }
   }
 
   toggleFavoriteRecipe = (event) => {
@@ -95,15 +99,17 @@ export default class App extends Component {
     const randomCategory = this.state.userCategories[random].value
     const triviaUrl = `https://opentdb.com/api.php?amount=10&category=${randomCategory}&difficulty=${difficulty}`
 
-    const triviaInfo = Promise.resolve(fetchAPI.getInformation(triviaUrl))
-    triviaInfo.then(trivia => {
-      trivia.results.forEach((question, index) => question.id = index + 1)
-      this.setState({
-        trivia: trivia.results,
-        questionNumber: 1,
-        currentQuestion: trivia.results[0]
-      })
+    const triviaInfo = Promise.resolve(this.getApiInformation(triviaUrl))
 
+    triviaInfo.then(trivia => {
+      if (trivia) {
+        trivia.results.forEach((question, index) => question.id = index + 1)
+        this.setState({
+          trivia: trivia.results,
+          questionNumber: 1,
+          currentQuestion: trivia.results[0]
+        })
+      }
     }).then(() => {
       localStorage.setItem('triviology-info', JSON.stringify(this.state))
     })
@@ -197,6 +203,15 @@ export default class App extends Component {
     })
   }
 
+  // API Call function
+  getApiInformation(url) {
+    return fetch(url)
+      .then(response => response.json())
+      .catch(error => {
+        return this.setState({ error: 'Something went wrong. Please refresh the page and try again.' })
+      })
+  }
+
   // App component functions
   componentDidMount = () => {
     const storedInformation = localStorage.getItem('triviology-info')
@@ -223,67 +238,69 @@ export default class App extends Component {
             recipeEnabled={this.state.currentBeverage?.idDrink ? true : false}
             triviaEnabled={this.state.currentQuestion?.category ? true : false}
             />
-          <main className='main'>
-            <Route
-              exact path='/'
-              render={() => {
-                return <Form
-                  possibleBases={this.state.allRecipeBases}
-                  populateRecipe={this.populateRecipe}
-                  populateTrivia={this.populateTrivia}
-                  recipeEnabled={this.state.currentBeverage?.strDrink ? false : true}
-                  triviaEnabled={this.state.currentQuestion?.question ? false : true}
-                  />
-              }}
-              />
-            <Route
-              path='/preferences'
-              render={() => {
-                return <Preferences
-                  possibleCategories={this.state.allCategories}
-                  userCategories={this.state.userCategories}
-                  updateCategories={this.updateUserCategories}
-                  favoriteRecipes={this.state.favoriteRecipes}
-                  isFavorite={true}
-                  toggleFavorite={this.toggleFavoriteRecipe}
-                  />
-              }}
-              />
-            <Route
-              path='/recipe'
-              render={() => {
-                return <Recipe
-                  recipe={this.state.currentBeverage}
-                  newBeverage={this.populateCurrentBeverage}
-                  triviaEnabled={this.state.currentQuestion.question ? false : true}
-                  isFavorite={this.state.favoriteRecipes.find(recipe => {
-                    return recipe.idDrink === this.state.currentBeverage.idDrink}) ?
-                    true :
-                    false
-                  }
-                  toggleFavorite={this.toggleFavoriteRecipe}
-                  />
-              }}
-              />
-            <Route
-              path='/trivia'
-              render={() => {
-                return <Question
-                  question={this.state.currentQuestion}
-                  answered={this.state.answered}
-                  number={this.state.questionNumber}
-                  score={this.state.score}
-                  answerQuestion={this.answerQuestion}
-                  restart={this.restartTrivia}
-                  newGame={this.startNewTrivia}
-                  />
-              }}
-              />
-            <Route
-              path='*'
-              render={() => <Redirect to='/' />}
-              />
-          </main>
+          {this.state.error ? <p className='error'>{this.state.error}</p> :
+            <main className='main'>
+              <Route
+                exact path='/'
+                render={() => {
+                  return <Form
+                    possibleBases={this.state.allRecipeBases}
+                    populateRecipe={this.populateRecipe}
+                    populateTrivia={this.populateTrivia}
+                    recipeEnabled={this.state.currentBeverage?.strDrink ? false : true}
+                    triviaEnabled={this.state.currentQuestion?.question ? false : true}
+                    />
+                }}
+                />
+              <Route
+                path='/preferences'
+                render={() => {
+                  return <Preferences
+                    possibleCategories={this.state.allCategories}
+                    userCategories={this.state.userCategories}
+                    updateCategories={this.updateUserCategories}
+                    favoriteRecipes={this.state.favoriteRecipes}
+                    isFavorite={true}
+                    toggleFavorite={this.toggleFavoriteRecipe}
+                    />
+                }}
+                />
+              <Route
+                path='/recipe'
+                render={() => {
+                  return <Recipe
+                    recipe={this.state.currentBeverage}
+                    newBeverage={this.populateCurrentBeverage}
+                    triviaEnabled={this.state.currentQuestion.question ? false : true}
+                    isFavorite={this.state.favoriteRecipes.find(recipe => {
+                      return recipe.idDrink === this.state.currentBeverage.idDrink}) ?
+                      true :
+                      false
+                    }
+                    toggleFavorite={this.toggleFavoriteRecipe}
+                    />
+                }}
+                />
+              <Route
+                path='/trivia'
+                render={() => {
+                  return <Question
+                    question={this.state.currentQuestion}
+                    answered={this.state.answered}
+                    number={this.state.questionNumber}
+                    score={this.state.score}
+                    answerQuestion={this.answerQuestion}
+                    restart={this.restartTrivia}
+                    newGame={this.startNewTrivia}
+                    />
+                }}
+                />
+              <Route
+                path='*'
+                render={() => <Redirect to='/' />}
+                />
+            </main>
+          }
           <Footer />
         </div>
       </Router>
