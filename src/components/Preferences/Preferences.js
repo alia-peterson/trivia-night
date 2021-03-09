@@ -60,6 +60,7 @@ export default function Preferences({ possibleCategories, userCategories, update
     <>
       <section>
         <h2>Trivia Categories:</h2>
+        <p>Note: Please select at least one category. If all categories are unchecked, the list will be updated to include all categories on reload.</p>
         <ul className='categories'>{categoryList}</ul>
       </section>
       <section>
