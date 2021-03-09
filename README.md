@@ -6,7 +6,7 @@
 * [Deployment](#deployment)
 * [Features](#features)
 * [Future Improvements](#future-improvements)
-* [Wins & Challenges](#wins-&-challenges)
+* [Wins & Challenges](#wins--challenges)
 * [Author](#author)
 
 ## Introduction
@@ -22,7 +22,7 @@ React.js, React-Router, Cypress.io, Fetch, JSON, CSS, HTML
 
 ## Deployment
 This website was deployed to Heroku through Heroku’s automated deploy pipeline.  
-[Triviology Deployment Link]()
+[Triviology Deployment Link](https://triviology.herokuapp.com/)
 
 **To run locally:**
 1. Clone this repository onto your machine

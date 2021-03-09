@@ -54,9 +54,15 @@ context('Triviology Website', () => {
       .get('button[name=recipe-button]').click()
       .get('article img.fav-icon').click()
       .get('a[name=preferences]').click()
+      .get('.favorite-message').should('not.exist')
       .get('article h3').should('have.text', 'Margarita')
       .get('article img.fav-icon').click()
       .get('article').should('not.exist')
+  })
+
+  it('Should display a message indicating that there are no favorite recipes at this time', () => {
+    cy.get('a[name=preferences]').click()
+      .get('.favorite-message').should('have.text', 'You don\'t have any favorite recipes at this time, add some to see them here!')
   })
 
   it('Should be able to fill out the trivia form and view the trivia questions', () => {
