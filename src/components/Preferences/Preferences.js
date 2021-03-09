@@ -64,7 +64,10 @@ export default function Preferences({ possibleCategories, userCategories, update
       </section>
       <section>
         <h2>Favorite Beverage Recipes:</h2>
-        <div className='favorite-container'>{favRecipes}</div>
+        {favRecipes.length > 0 ?
+          <div className='favorite-container'>{favRecipes}</div> :
+          <p>You don't have any favorite recipes at this time, add some to see them here!</p>
+        }
       </section>
     </>
   )

@@ -126,4 +126,10 @@ context('Triviology Website', () => {
       .get('article button[name=button-newgame]').click()
       .get('article p').should('have.text', 'Neptune\'s greek name was...')
   })
+
+  it('Should be able to add and remove possible trivia categories from preferences', () => {
+    cy.get('a[name=preferences]').click()
+      .get('[type="checkbox"]:first').uncheck()
+      .get('[type="checkbox"]:first').check()
+  })
 })
