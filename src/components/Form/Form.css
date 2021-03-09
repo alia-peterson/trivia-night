@@ -45,3 +45,23 @@
   display: flex;
   justify-content: space-between;
 }
+
+@media screen and (max-width: 600px) {
+  .form-container {
+    width: 80%;
+  }
+
+  .form {
+    width: 80%;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .button-form-container {
+    flex-direction: column;
+  }
+
+  .button-form-container .button {
+    margin-top: 0.2rem;
+  }
+}

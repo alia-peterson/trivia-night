@@ -32,3 +32,13 @@
 .incorrect {
   margin: 0.2rem;
 }
+
+@media screen and (max-width: 600px) {
+  .trivia-category {
+    margin: 1rem;
+  }
+
+  .trivia-container {
+    width: 80%;
+  }
+}

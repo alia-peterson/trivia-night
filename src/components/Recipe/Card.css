@@ -41,3 +41,10 @@
   list-style: none;
   text-align: left;
 }
+
+@media screen and (max-width: 600px) {
+  .recipe-image {
+    margin-right: 0;
+    width: 100px;
+  }
+}

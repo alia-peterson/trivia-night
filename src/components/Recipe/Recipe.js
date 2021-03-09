@@ -5,7 +5,7 @@ import './Recipe.css'
 
 export default function Recipe({ recipe, newBeverage, triviaEnabled, isFavorite, toggleFavorite }) {
   return (
-    <div>
+    <>
       <h2>Beverage Recipe:</h2>
       <article className='recipe-container' id={recipe.idDrink}>
         <Card
@@ -29,6 +29,6 @@ export default function Recipe({ recipe, newBeverage, triviaEnabled, isFavorite,
           </button>
         </Link>
       </article>
-    </div>
+    </>
   )
 }

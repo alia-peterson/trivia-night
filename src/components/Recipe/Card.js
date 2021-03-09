@@ -47,9 +47,9 @@ export default function Card({ recipe, isFavorite, toggleFavorite }) {
         alt={iconAltText}
         onClick={toggleFavorite}
         />
+      <h3 className='recipe-name'>{recipe.strDrink}</h3>
       <div className='recipe-inst-container'>
         <div>
-          <h3 className='recipe-name'>{recipe.strDrink}</h3>
           <h4 className='recipe-heading'>Ingredients:</h4>
           <ul className='recipe-ingr'>{ingredients}</ul>
         </div>

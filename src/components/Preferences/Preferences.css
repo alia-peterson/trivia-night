@@ -1,4 +1,5 @@
 .categories {
+  padding: 0;
   columns: 3;
   -webkit-columns: 3;
   -moz-columns: 3;
@@ -21,4 +22,24 @@
   padding: 1rem;
   margin: 1rem;
   width: 400px;
+}
+
+@media screen and (max-width: 768px) {
+  .categories {
+    columns: 2;
+    -webkit-columns: 2;
+    -moz-columns: 2;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .categories {
+    columns: 1;
+    -webkit-columns: 1;
+    -moz-columns: 1;
+  }
+
+  .favorite-card {
+    width: 80%;
+  }
 }

@@ -50,3 +50,11 @@
 a:link {
   text-decoration: none;
 }
+
+@media screen and (max-width: 600px) {
+  .header {
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+  }
+}

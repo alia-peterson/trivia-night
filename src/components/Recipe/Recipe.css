@@ -12,3 +12,9 @@
 .recipe-container .button {
   margin: 0.2rem;
 }
+
+@media screen and (max-width: 600px) {
+  .recipe-container {
+    width: 80%;
+  }
+}
