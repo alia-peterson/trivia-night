@@ -11,6 +11,7 @@ export default function Header({ recipeEnabled, triviaEnabled }) {
           exact to='/'
           name='home'
           className='nav-link'
+          aria-current='page'
           >
           Home
         </NavLink>
@@ -18,6 +19,7 @@ export default function Header({ recipeEnabled, triviaEnabled }) {
           exact to='/preferences'
           name='preferences'
           className='nav-link'
+          aria-current='page'
           >
           Preferences
         </NavLink>
@@ -26,6 +28,7 @@ export default function Header({ recipeEnabled, triviaEnabled }) {
             exact to='/recipe'
             name='recipe'
             className='nav-link'
+            aria-current='page'
             >
             Recipe
           </NavLink>
@@ -35,6 +38,7 @@ export default function Header({ recipeEnabled, triviaEnabled }) {
             exact to='/trivia'
             name='trivia'
             className='nav-link'
+            aria-current='page'
             >
             Trivia
           </NavLink>

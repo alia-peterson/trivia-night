@@ -29,7 +29,7 @@ export default function Question({ question, answered, number, score, answerQues
   })
 
   useEffect(() => {
-    const answers = question.incorrect_answers
+    const answers = question.incorrect_answers.map(answer => answer)
     const random = Math.floor(Math.random() * Math.floor(answers.length))
     answers.splice(random, 0, question.correct_answer)
     setPossibleAnswers(answers)
