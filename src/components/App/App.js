@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import {
   BrowserRouter as Router,
-  Route
+  Route,
+  Redirect
 } from 'react-router-dom'
 import fetchAPI from '../../fetchAPI'
 import utilities from '../../utilities'
@@ -229,7 +230,7 @@ export default class App extends Component {
               }}
               />
             <Route
-              exact path='/preferences'
+              path='/preferences'
               render={() => {
                 return <Preferences
                   possibleCategories={this.state.allCategories}
@@ -242,7 +243,7 @@ export default class App extends Component {
               }}
               />
             <Route
-              exact path='/recipe'
+              path='/recipe'
               render={() => {
                 return <Recipe
                   recipe={this.state.currentBeverage}
@@ -258,7 +259,7 @@ export default class App extends Component {
               }}
               />
             <Route
-              exact path='/trivia'
+              path='/trivia'
               render={() => {
                 return <Question
                   question={this.state.currentQuestion}
@@ -270,6 +271,10 @@ export default class App extends Component {
                   newGame={this.startNewTrivia}
                   />
               }}
+              />
+            <Route
+              path='*'
+              render={() => <Redirect to='/' />}
               />
           </main>
           <Footer />
