@@ -15,10 +15,11 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "cypress open",
+    "test": "npm start & cypress run",
     "eject": "react-scripts eject",
     "lint": "eslint .",
-    "cypress": "cypress open"
+    "cypress": "cypress open",
+    "cy:run": "cypress run"
   },
   "eslintConfig": {
     "extends": [

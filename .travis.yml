@@ -3,3 +3,9 @@ node_js:
   - "node"
 notifications:
   email: false
+cache:
+  directories:
+    - ~/.npm
+    - ~/.cache
+  override:
+    - npm ci
