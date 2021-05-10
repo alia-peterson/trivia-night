@@ -8,11 +8,20 @@
   justify-content: space-between;
   text-align: center;
   height: 100%;
+  width: 100%;
 }
 
 .main {
   align-items: center;
   display: flex;
   flex-direction: column;
-  overflow: scroll;
+  overflow-y: scroll;
+  height: 100%;
+  margin: 0 1rem;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.main::-webkit-scrollbar {
+  display: none;
 }
