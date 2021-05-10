@@ -36,7 +36,7 @@ export default function Question({ question, answered, number, score, answerQues
   }, [question])
 
   return (
-    <>
+    <div className='body-container'>
       <h2 className='trivia-category'>Category: {question.category}</h2>
       <article className={`trivia-container ${answered && 'show-results'}`} id={question.id}>
         {number > 10 ?
@@ -69,6 +69,6 @@ export default function Question({ question, answered, number, score, answerQues
           </>
         }
       </article>
-    </>
+    </div>
   )
 }
