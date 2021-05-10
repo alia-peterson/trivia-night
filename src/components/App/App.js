@@ -107,7 +107,8 @@ export default class App extends Component {
         this.setState({
           trivia: trivia.results,
           questionNumber: 1,
-          currentQuestion: trivia.results[0]
+          currentQuestion: trivia.results[0],
+          score: 0
         })
       }
     }).then(() => {
@@ -160,7 +161,6 @@ export default class App extends Component {
   startNewTrivia = () => {
     const currentDifficulty = this.state.currentQuestion.difficulty
     this.populateTrivia(currentDifficulty)
-    this.restartTrivia()
   }
 
   // User preference functions
